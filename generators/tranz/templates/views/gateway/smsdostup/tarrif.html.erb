@@ -1,0 +1,14 @@
+<% if @tarrif -%>
+<% semantic_form_for :pay, :url => pay_gateway_smsdostup_path, :html => {:class => "base_form"} do |form| %>
+<%= hidden_field_tag 'plan_id', @plan.id %>
+<%= hidden_field_tag 'operator_id', @operator.id %>
+Для оплаты тарифного плана отправьте смс на номер <%= @tarrif.number %>, со следующий текст '<%= @gateway.keyword %> <%= @sms_text %> ', без кавыек.
+<br />
+Полученный код введите сюда: <br/>
+<%= text_field_tag "sms_code" %>
+<%= submit_tag "Pay" %>
+<% end -%>
+<% else -%>
+У выбранного оператора нет смс нужной стоимостью
+<% end -%>
+

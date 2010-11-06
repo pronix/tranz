@@ -1,0 +1,66 @@
+<li>
+  <%= link_to t('user_panel_dashboard',
+      :default => 'Dashboard'), admin_dashboard_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_settings',
+      :default => 'Account settings'), account_edit_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_roles', :default => 'Roles'), admin_roles_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_plans',
+      :default => 'Plans'), admin_plans_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_countries',
+      :default => 'IP, country settings'), admin_countries_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_statistic', :default => 'Statistic'), admin_statistics_root_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_blackips',
+      :default => 'Blackip'), blackips_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_tickets',
+      :default => 'Tickets'), tickets_path %>
+</li>
+
+<li>
+  <%= link_to t('user_panel_news',
+      :default => 'News'), admin_news_items_path %>
+</li>
+
+<li>
+  <%= link_to t('user_panel_files',
+      :default => 'Files'), admin_files_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_users',
+      :default => 'Users'), admin_users_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_webmasters',
+      :default => 'Webmasters'), admin_webmasters_path %>
+</li>
+
+<li>
+  <%= link_to t('user_panel_gateways',
+      :default => 'Gateways'), admin_gateways_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_payouts',
+      :default => 'Payouts'), admin_payouts_path %>
+</li>
+<li>
+  <%= link_to I18n.t('System settings'), admin_system_settings_path %>
+</li>
+<li>
+  <%= link_to I18n.t('Group web masters'), admin_groups_path %>
+</li>
+<li>
+  <%= link_to I18n.t('Statistics on transactions'), admin_statistics_on_transactions_path %>
+</li>

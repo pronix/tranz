@@ -1,0 +1,40 @@
+<% semantic_form_for :pay, :url => @gateway.url,
+                           :html => {:class => "base_form", :method => :post}  do |form| %>
+  <% form.inputs  do -%>
+    <li  class="base_form">
+      <%= t('money_bookers.pay_from_email', :default => "Account(email)") %>:
+      <%= @pay_from_email.blank? ? "no" :  @pay_from_email %>
+    </li>
+    <li class="base_form">
+      <%= @invoice.class.human_attribute_name :amount %> : <%= @invoice.amount  %>
+    </li>
+  <% end -%>
+
+<%= hidden_field_tag "pay_to_email", @gateway.pay_to_email %>
+<%= hidden_field_tag "pay_from_email", @pay_from_email %>
+<%= hidden_field_tag "transaction_id", @invoice.id %>
+
+<%= hidden_field_tag "recipient_description", @gateway.recipient_description %>
+<%= hidden_field_tag "return_url", payment_return_gateway_money_bookers_url %>
+<%= hidden_field_tag "return_url_text", @gateway.return_url_text %>
+<%= hidden_field_tag "return_url_target", @gateway.return_url_target %>
+<%= hidden_field_tag "cancel_url", payment_cancel_gateway_money_bookers_url(:transaction_id => @invoice.id) %>
+<%= hidden_field_tag "cancel_url_target", @gateway.cancel_url_target %>
+<%= hidden_field_tag "status_url", payment_status_gateway_money_bookers_url %>
+
+<%= hidden_field_tag "language",  @gateway.language %>
+<%= hidden_field_tag "amount",    @invoice.amount %>
+<%= hidden_field_tag "currency",  @gateway.currency %>
+<%= hidden_field_tag "amount2_description", t('money_bookers.amount2_description') %>
+<%= hidden_field_tag "amount2",    @invoice.amount %>
+<%= hidden_field_tag "detail1_description", t('money_bookers.detail1_description') %>
+<%= hidden_field_tag "detail1_text", @invoice.id %>
+<%= hidden_field_tag "detail2_description", t('money_bookers.detail2_description') %>
+<%= hidden_field_tag "detail2_text", t('money_bookers.detail2_text') %>
+<%= hidden_field_tag "submit_id", "" %>
+
+  <% form.buttons do -%>
+    <%= form.commit_button t('money_bookers.pay', :default => "Pay"), :class => "base_buttons"  %>
+  <% end -%>
+<% end -%>
+

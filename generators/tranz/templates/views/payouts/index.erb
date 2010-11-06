@@ -1,0 +1,54 @@
+<div class="middle_block">
+  <h1 class="dotted">Payouts</h1>
+  <% if false -%>
+  <!-- Убрать если не понадодиться -->
+  <ul class="content_menu">
+    <li class="<%= 'content_menu_a' if (session[:payouts_filter][:status]["opened"] rescue true) %>">
+      <% link_to payouts_path(:status => "opened")  do %>
+      <span class="conten_menu_left">
+        <%= content_tag :span, t('Opened claims', :default => 'Opened claims'),
+                        :class => "conten_menu_right"  %>
+      </span>
+      <% end -%>
+    </li>
+    <li class="<%= 'content_menu_a' if (session[:payouts_filter][:status]["closed"] rescue false) %>">    
+      <% link_to payouts_path(:status => "closed")  do %>
+      <span class="conten_menu_left">
+        <%= content_tag :span, t('Arhive claims', :default => 'Arhive claims'),
+                        :class => "conten_menu_right"  %>
+      </span>
+      <% end -%>
+    </li>
+  </ul>
+  <% end -%>
+  
+  <table class="traffic_table payout">
+    <tr>
+
+      <% [%w(date created_at), %w(amount finite_sum), %w(payment_menthod gateway_id), %w(status)].each do |f| -%>
+      <th >
+        <%=link_to  f.first.to_s.humanize,
+                    payouts_path("order" =>f.last),
+                    :class => [('select' if session[:payouts_order].split.include?(f.last.to_s)),
+                               (@order_status[!session[:payouts_order]["ASC"]])
+                               ].join(' ') %>
+      </th>
+      <% end -%>
+    </tr>
+    <% @collection.each do |cl| -%>
+      <tr class=<%= cycle('traffic_table_color', '') %>>
+        <td><%= cl.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td><%= cl.finite_sum %></td>
+        <td><%= cl.gateway.try(:name) %></td>
+        <td><%= cl.state %></td>
+      </tr>
+    <% end -%>
+    <tr class="total">
+      <td><%= I18n.t("total") %></td>
+      <td><%= @collection.sum(&:finite_sum) %></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+<%= render :partial => 'right_sidebar' %>

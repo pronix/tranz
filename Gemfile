@@ -1,0 +1,3 @@
+gem "aasm"
+gem 'settingslogic'
+

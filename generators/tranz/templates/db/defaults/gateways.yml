@@ -1,0 +1,35 @@
+webmoney:
+  name: Webmoney
+  type: Gateway::Webmoney
+  active: true
+  payment: true
+  payout: true
+  fee: 0.8
+  max_amount: 20000
+  min_amount: 20
+  preferences: |
+    ---
+    payee_purse: "R324054665688"
+    link: "/gateway/webmoney"
+    wmid: "329080303191"
+    url: "https://merchant.webmoney.ru/lmi/payment.asp"
+    secret: "[bnhjevysqblfkmuj"
+paypal:
+  name: Paypal
+  type: Gateway::Paypal
+  active: true
+  payment: true
+  payout: true
+  fee: 0.8
+  max_amount: 20000
+  min_amount: 20
+  preferences: |
+    ---
+    cert_id: "MJFKHQF4DFXKS"
+    business: "parall_1258002853_biz@gmail.com"
+    country: "EN"
+    cmd: "_xclick"
+    signature: "AY6W4PuOSkptV7OpZZhqb44OC6yfAQfc1RhO6xXQsrSoKsD3wvAFetbK"
+    currency: "USD"
+    login: "parall_1258002853_biz_api1.gmail.com"
+    password: "1258002859"

@@ -1,0 +1,32 @@
+<li>
+  <%= link_to t('user_panel_dashboard',
+      :default => 'Dashboard'), account_show_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_settings',
+      :default => 'Account settings'), account_edit_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_panel_files',
+      :default => 'My files'), folders_path %>
+</li>
+<li>
+    <%= link_to t('user_panel_statistic',
+        :default => 'Statistic'), statistics_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_upload_files',
+      :default => 'Upload files'), account_upload_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_payouts',
+      :default => 'Payouts'), payouts_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_tickets',
+      :default => 'Tickets'), tickets_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_tools',
+      :default => 'Tools'), invitees_path %>
+</li>

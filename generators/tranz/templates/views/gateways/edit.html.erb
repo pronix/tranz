@@ -1,0 +1,7 @@
+<% @gateway && @gateway.class.user_attrs.each do |a| -%>
+<span id="gw_id_<%= @gateway.try(:id) -%>">
+  <%= text_field_tag "user[gateways][#{@gateway.id}]params[#{a.to_s}]",
+      (@gateway_user && @gateway_user.preferences.try(:[],a.to_s)),
+      :class => "account_form_input"  %>
+</span>
+<% end -%>

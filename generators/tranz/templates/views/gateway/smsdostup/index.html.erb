@@ -1,0 +1,46 @@
+<div class='red'>
+  <%= flash[:error] %>
+</div>
+
+<table>
+  <tr>
+    <td colspan=2>
+      Выбранные тарифный план:
+      <%= @plan.name  %>, стоимость:  <%= number_to_currency @plan.price  %>
+      <%= hidden_field_tag 'plan_id', @plan.id %>
+    </td>
+  </tr>
+  <tr>
+    <td>Select country:</td>
+    <td>  <%= select_tag 'country', options_for_select( @countries.collect{ |u| [u.name, u.id] }, :selected => @current_country.try(:id)) %></td>
+  </tr>
+  <tr>
+    <td>Select mobile operators:</td>
+    <td>
+      <%= select_tag 'operator', options_for_select( [[nil,nil]]+@operators.collect{ |u| [u.name, u.id] }, :selected => @operator.try(:id)) %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan=2 id='place_for_sms_info'>
+      <% unless @tarrif.blank? -%>
+      <%= render :file => 'gateway/smsdostup/tarrif' %>
+      <% end -%>
+    </td>
+  </tr>
+</table>
+
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $("#country").change(function(){
+      var url = "<%= operators_gateway_smsdostup_path(:id, :format => :js) %>".replace('id', $(this).val());
+      $.ajax({ url: url, success: function(data){ $("#operator").html(data) }   });
+    });
+    $("#operator").change(function(){
+      var url = "<%= tarrif_gateway_smsdostup_path(:id, :format => :js) %>".replace('id', $(this).val());
+      $('#place_for_sms_info').html('Поиск тарифа...');
+      $.ajax({ url: url,data: {'plan_id': $('#plan_id').val()}, success: function(data){ $('#place_for_sms_info').html(data) }   });
+    });
+
+  });
+</script>

@@ -1,0 +1,62 @@
+<div class="middle_block_last">
+  <h1 class="dotted small">
+    <span><%= I18n.t("new_payout") %></span>
+  </h1>
+  <div class="left">
+    <%= link_to_back %>
+  </div>
+           
+  <div class="color_title">
+   <%= balance :class => "inline"%>.
+   <span>
+     (<%= @gateway.name.humanize %>)
+     <%= t('claim_on_payouts.webmoney.title', :default => "withdrawal request" )  %>
+   </span>
+  </div>
+
+  <% semantic_form_for :claim, @object, :url => payouts_path,
+  :html => { :method => :post, :class => 'base_form' }  do |form| %>
+  <% form.inputs :class => "base_form"  do -%>
+  <li class="warning_info">
+    <span >
+      <%= @gateway.class.human_attribute_name :fee %>:
+      <% if @gateway.fee_in_percentage?-%>
+        <%= number_to_percentage @gateway.display_fee, :precision => 2 %>
+      <% else -%>
+        <%= number_to_currency @gateway.display_fee  %>
+      <% end -%>
+    </span>
+    <br />
+
+    <span>
+      <%= @gateway.class.human_attribute_name :min_amount %>:
+      <%=number_to_currency(@gateway.min_amount , :precision => 2) %></span>
+
+    <span>
+      <%= @gateway.class.human_attribute_name :max_amount %>:
+      <%= number_to_currency(@gateway.max_amount , :precision => 2) %>
+    </span>
+  </li>
+  <% end -%>
+  <% form.inputs  do -%>
+  <%= form.input :gateway_id, :as => :hidden %>
+  <%= form.input :amount, :wrapper_html => {:class => "base_form" } %>
+  
+  <% @gateway.class.user_attrs.each do |a| -%>
+    <%= form.input a.to_sym, :value => @user_preferences[a.to_s],
+                             :wrapper_html => {:class => "base_form" } %>
+  <% end -%>
+  <%= form.input :comment, :input_html => {:rows => 5 },
+                           :wrapper_html => {:class => "base_form" }  %>
+  <% end -%>
+   <div><%= @gateway.description %></div>
+  <% form.buttons do -%>
+  <%= form.commit_button t('claim_on_payouts.webmoney.continue', :default => "Continue"),  :class => "base_buttons" %>
+  <% end -%>
+  <% end %>
+  
+</div>
+
+<style type="text/css" media="screen">
+  .inline {display:inline;}
+</style>

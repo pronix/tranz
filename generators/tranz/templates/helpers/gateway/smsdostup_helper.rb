@@ -1,0 +1,2 @@
+module Gateway::SmsdostupHelper
+end

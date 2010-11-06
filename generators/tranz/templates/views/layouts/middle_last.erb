@@ -1,0 +1,7 @@
+<% inside_layout 'application' do %>
+<%= javascript_include_tag "prototype" %>
+<%= active_scaffold_includes %>
+  <div class="middle_block">
+    <%= yield %>
+  </div>
+<% end %>

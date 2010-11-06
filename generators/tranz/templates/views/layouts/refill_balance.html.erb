@@ -1,0 +1,8 @@
+<% inside_layout 'application' do -%>
+<div id="content"></div>
+<div class="upload_form_block">
+  <%#= gateway_index_title(@gateway) %>
+  <%= yield -%>
+</div>
+<%#= render "gateway/shared/right_sidebar" %>
+<% end -%>

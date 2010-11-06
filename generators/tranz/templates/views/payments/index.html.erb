@@ -1,0 +1,23 @@
+<div class="middle_block">
+  <h1 class="dotted">Payments</h1>  
+  <table class="traffic_table">
+    <tr>
+      <% %w(created_at amount gateway status).each do |f| -%>
+      <th><%= Transaction.human_attribute_name f.to_sym %></th>
+      <% end -%>
+    </tr>
+    
+    <% @current_user.transactions.each do |transaction| %>
+      <tr class=<%= cycle('traffic_table_color', '') %>>
+        <td><%= transaction.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td>$ <%= transaction.amount %></td>
+        <td><%= transaction.gateway.try(:name) %></td>
+        <td><%= transaction.status %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<%= render :partial => 'right_sidebar'  %>
+
+
+      

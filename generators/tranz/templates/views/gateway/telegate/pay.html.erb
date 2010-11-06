@@ -1,0 +1,25 @@
+<% semantic_form_for "pay", :url => @gateway.url, :html => {:class => "base_form"} do |form| %>
+  <% form.inputs :style => "display:none;" do -%>
+    <li class="base_form">
+      <%= @invoice.class.human_attribute_name :amount %> : <%= @invoice.amount  %>
+    </li>
+    <%= hidden_field_tag "WS_ID", @gateway.ws_id %>
+    <%= hidden_field_tag "AMOUNT", @invoice.amount %>
+    <%= hidden_field_tag "INV_ID", @invoice.id %>
+    <%= hidden_field_tag "COMMENTS", Plan.find_by_id(@invoice.comment.split('plan_id').last).try(:name) %>
+    <%= hidden_field_tag "PAY_METHOD", @gateway.pay_method %>
+    <%= hidden_field_tag "", @gateway.pay_method %>
+    <% %w(USER_FIRST_NAME USER_SECOND_NAME USER_LAST_NAME USER_COUNTRY USER_CITY USER_ZIP USER_ADDRESS USER_PHONE USER_EMAIL).each do |ff| -%>
+      <%= hidden_field_tag ff, "" %>
+    <% end -%>
+<% end -%>
+
+<% form.buttons do -%>
+<div>You will be redirected to payment page</div>
+<div>Please
+  <input type="submit" value="click here" name="commit" id="pay_submit" class="emul_link" /> if you are not automatically redirected</div>
+<% end -%>
+
+<% end -%>
+
+

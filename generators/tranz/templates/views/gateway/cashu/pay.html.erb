@@ -1,0 +1,37 @@
+<div class="middle_block">
+  <%= gateway_index_title(@gateway) %>
+  <% semantic_form_for :pay, :url => @gateway.url,
+                       :html => {:class => "base_form", :method => :post}  do |form| %>
+  <% form.inputs do  -%>
+  <li class="base_form">
+    <%= @invoice.class.human_attribute_name :amount %> : <%= @invoice.amount  %>
+  </li>
+  <%= hidden_field_tag("test_mode", 1)  unless RAILS_ENV["production"] %>
+    
+  <%= hidden_field_tag "merchant_id", @gateway.merchant_id  %>
+  <%= hidden_field_tag "token", @token  %>
+  <%= hidden_field_tag "currency", @gateway.currency  %>
+  <%= hidden_field_tag "amount", @invoice.amount.to_f  %>
+  <%= hidden_field_tag "language", @gateway.language  %>
+    
+
+  <%= hidden_field_tag "display_text", t('cashu.display_text')  %>
+  <%= hidden_field_tag "txt1", t('cashu.txt1')  %>    
+
+  <%= hidden_field_tag "session_id", @invoice.id  %>
+  <% end -%>    
+
+  <% form.buttons do -%>
+  
+  <%= form.commit_button t('cashu.pay', :default => "Continue"),
+                           :class => "base_buttons"  %>
+  
+  <input type="image" src="http://www.cashu.com/images/newModel/buyIcons/icon_e3.gif"
+         name="submit" alt="<%= t('cashu.pay_image_alt', :default => 'Cashu') -%>">
+  
+  <% end -%>
+
+  
+  <% end -%>
+</div>
+<%= render "gateway/shared/right_sidebar" %>

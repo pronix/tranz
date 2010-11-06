@@ -1,0 +1,19 @@
+<% semantic_form_for :pay, :url => pay_gateway_money_bookers_path, :html => {:class => "base_form"}  do |form| %>
+
+  <% form.inputs  do -%>
+    <%= form.input :amount, :wrapper_html => {:class => "base_form" } %>
+    <li class="base_form string">
+      <label for="pay_pay_from_email">
+        <%= @gateway.class.human_attribute_name :pay_from_email %>
+      </label>
+      <%= text_field_tag "pay[pay_from_email]", current_user.email %>
+    </li>
+  <% end -%>
+
+  <% form.buttons do -%>
+  <%= form.commit_button t('money_bookers.continue', :default => "Continue"),
+                         :class => "base_buttons"  %>
+  <% end -%>
+
+<% end %>
+

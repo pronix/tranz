@@ -1,0 +1,22 @@
+<li>
+  <%= link_to t('user_panel_dashboard',
+      :default => 'Dashboard'), account_show_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_settings',
+      :default => 'Account settings'), account_edit_path %>
+</li>
+<li>
+  <%= link_to t('user_panel_panel_files',
+      :default => 'My files'), folders_path %>
+</li>
+<% if current_user.is_paid? %>
+   <li>
+     <%= link_to t('user_panel_traffic_stats',
+         :default => 'Traffic stats'), traffics_statistics_path %>
+   </li>
+   <li>
+    <%= link_to t('user_panel_transactions',
+        :default => 'Transactions'), account_transaction_path %>
+   </li>
+<% end %>

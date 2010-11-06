@@ -1,0 +1,24 @@
+Tranz
+=====
+
+Introduction goes here.
+
+
+Example
+=======
+
+Example goes here.
+
+Installation
+============
+
+To install tranz plugin go to your rails app folder and execute:
+
+$ rails plugin install git@github.com:pronix/tranz.git
+$ rails g tranz
+
+If everything is OK feel free to remove plugin with:
+
+$ rails plugin remove tranz
+
+Copyright (c) 2010 [name of plugin creator], released under the MIT license

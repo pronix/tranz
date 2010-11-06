@@ -1,0 +1,42 @@
+<% inside_layout 'application' do -%>
+<script src="http://cdn.jquerytools.org/1.2.3/form/jquery.tools.min.js"></script>
+<%= stylesheet_link_tag 'calendar' %>
+
+ <div class="middle_block_last">
+  <% if current_user.is_webmaster? %>
+   <h1 class="dotted remote">Statistics</h1>
+   <% if params[:action][/overall|referral/] -%>
+    <% form_tag '', :method => :get do %>
+      Select date From: <%= text_field_tag 'start_range', @start_range.to_s(:date_time2), :class => 'j_calendar' %>
+      To: <%= text_field_tag 'end_range', @end_range.to_s(:date_time2), :class => 'j_calendar' %>
+    <%= submit_tag 'Submit', :class => "yellow_button" %>
+    <% end -%>
+  <% end %>
+
+   <ul class="content_menu">
+
+     <li class=<%= 'content_menu_a' if @overall %>>
+       <% link_to overall_statistics_path do -%>
+       <span class="conten_menu_left" ><span class="conten_menu_right" ><%= t 'Overall' %></span></span>
+       <% end -%>
+     </li>
+     <li class=<%= 'content_menu_a' if @country_statistic %>>
+       <% link_to country_statistics_path do -%>
+       <span class="conten_menu_left" ><span class="conten_menu_right" ><%= t 'Country' %></span></span>
+       <% end -%>
+     </li>
+
+     <li class=<%= 'content_menu_a' if @user_referral %>>
+       <% link_to  referral_statistics_path do -%>
+       <span class="conten_menu_left" ><span class="conten_menu_right" ><%= t 'Referral' %></span></span>
+       <% end -%>
+     </li>
+
+   </ul>
+   <% end %>
+   <%= yield %>
+ </div>
+<% end -%>
+<script type="text/javascript" charset="utf-8">
+ 	$(function() { $(".j_calendar").dateinput({format: 'dd/mm/yyyy'}); });
+</script>

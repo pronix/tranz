@@ -1,0 +1,11 @@
+<div id='user_panel'>
+  <ul>
+    <% if current_user.admin_roles? %>
+      <%= render :file => '/layouts/_admin_panel' %>
+    <% elsif current_user.is_webmaster? -%>
+      <%= render :file => '/layouts/_webmaster_panel' %>
+    <% else %>
+      <%= render :file => '/layouts/_user_panel' %>
+    <% end -%>
+  </ul>
+</div>

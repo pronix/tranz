@@ -1,0 +1,8 @@
+Description:
+    Explain the generator
+
+Example:
+    rails generate tranz
+
+    This will create:
+        Full tranz infrastructure

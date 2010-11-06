@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <% unless @title.nil? %>
+    <title><%= @title %></title>
+  <% else %>
+    <title><%= title  %></title>
+  <% end %>
+  <%= stylesheet_link_tag 'style', 'application', 'formtastic','formtastic_changes', 'ezo' %>
+  <%= javascript_include_tag  "jquery","jquery.timers", "jquery-lng", "jquery.uploadProgress", "jquery.MultiFile", "jquery.validate", "ezo", "jquery.copy"  %>
+</head>
+<body <%= %q(onload="document.getElementById('pay_submit').click();") if params[:action] == 'pay' && params[:controller] =~ /gateway/%>>
+<%= @debug %>
+  <div id="main">
+    <div id="header">
+ <% if flash[:notice] %>
+<div class="note"><%= flash[:notice] %></div>
+  <% end %>
+      <%= content_tag :div, link_to("",root_url), :class => "main_logo" %>
+      <div class="head_right">
+        <%= render :file => '/layouts/head_nav' %>
+      </div>
+      <ul class="head_menu">
+        <li><%= head_menu_item(t('Upload'), root_path) %></li>
+        <li><%= head_menu_item(t('Premium'), premium_path) %></li>
+        <li><%= head_menu_item(t('FAQ'), faqc_index_path) %></li>
+        <li><%= head_menu_item(t('Contacts'), contacts_path) %></li>
+      </ul>
+    </div>
+    <div id="container">
+      <% current_user && @not_panel.nil? && content_tag(:div, :class => "left_menu") do -%>
+      <%= render :file => '/layouts/right_menu' %>
+      <% end -%>
+      <%= yield %>
+    </div>
+  <div class="footer_push"></div>
+  </div>
+  <div id="footer">
+    <div class="footer_copyrt">
+      Copyright © 2010 MediaValise.com. All rights reserved.
+    </div>
+    <ul class="bottom_menu">
+      <li><%= link_to t('News'), news_path %></li>
+      <li><%= link_to t('Terms'), terms_path %></li>
+      <li><%= link_to t('Privacy policy'), privacy_index_path %></li>
+      <li><%= link_to t('Abuse'), new_abuse_path %></li>
+      <li><%= link_to t('Contacts'), contacts_path %></li>
+    </ul>
+  </div>
+  <%= yield :js %>
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stats.ravenpay.com/piwik/" : "http://stats.ravenpay.com/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stats.ravenpay.com/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+  </body>
+</html>

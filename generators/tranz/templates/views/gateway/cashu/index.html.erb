@@ -1,0 +1,13 @@
+<div class="middle_block">
+  <%= gateway_index_title(@gateway) %>
+  <% semantic_form_for :pay, :url => pay_gateway_cashu_path,
+                       :html => {:class => "base_form"}  do |form| %>
+  <% form.inputs  do -%>
+    <%= form.input :amount, :wrapper_html => {:class => "base_form" } %>
+  <% end -%>
+  <% form.buttons do -%>
+  <%= form.commit_button t('cashu.continue', :default => "Continue"), :class => "base_buttons"  %>
+  <% end -%>
+<% end %>
+</div>
+<%= render "gateway/shared/right_sidebar" %>

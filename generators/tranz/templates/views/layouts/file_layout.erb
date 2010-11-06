@@ -1,0 +1,9 @@
+<% inside_layout 'application' do -%>
+  <% if controller.action_name == 'public_folder' %>
+    <%= yield %>
+  <% else %>
+    <% content_tag :div, :class => 'middle_block_last' do %>
+      <%= yield %>
+    <% end %>
+  <% end %>
+<% end -%>

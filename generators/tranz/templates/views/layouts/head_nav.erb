@@ -1,0 +1,13 @@
+<%= select_language(session[:language].to_s,request.env['REQUEST_URI'].split('?').first) %>
+<% content_tag :ul, :class => "head_nav" do  %>
+  <% unless current_user -%>
+      <%= content_tag(:li, link_to(t("Sign Up"),  signup_path), :class => "head_nav_a") %>
+      <%= content_tag(:li, '|', :class => "head_nav_a") %>
+      <%= content_tag(:li, link_to(t("Login"), login_path)) %>
+  <% else -%>
+  <li><%= link_to current_user.display_name, account_show_path %></li>
+  <%= content_tag(:li, link_to(t("Logout"),  logout_path, :method => :delete, :confirm => t('Are you sure you want to logout?'))) %>
+  <% end -%>
+<% end -%>
+
+

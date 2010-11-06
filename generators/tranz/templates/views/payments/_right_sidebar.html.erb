@@ -1,0 +1,16 @@
+<div class="right_white">
+  <h2>Available balance</h2>
+  $ <%= @current_user.earned_money %><br />
+  Period: <%= @current_user.created_at.strftime("%Y/%m/%d") %> - <%= Time.now.strftime("%Y/%m/%d") %>
+  <br /><br />
+  <div class="left">
+    <h2>
+      <%= t('refill_balance', :default => "Refill balance" )  %>
+    </h2>
+    <% Gateway.active.payment.each do |gw| -%>
+    <div class="yellow_button">
+      <%= link_to gw.name, url_for(gw.link) %>
+    </div>
+    <% end -%>
+  </div>
+</div>

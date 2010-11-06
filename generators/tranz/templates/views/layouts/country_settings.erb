@@ -1,0 +1,14 @@
+<% inside_layout 'application' do %>
+   <div class="middle_block_last">
+     <h1 class="dotted remote">Country settings</h1>
+     <ul class="content_menu">
+       <li class=<%= 'content_menu_a' if controller.controller_name == 'countries' %>>
+         <%= link_to '<span class="conten_menu_left"><span class="conten_menu_right">Country</span></span>', admin_countries_path %>
+       </li>
+       <li class=<%= 'content_menu_a' if controller.controller_name == 'country_speeds' %>>
+         <%= link_to '<span class="conten_menu_left"><span class="conten_menu_right">Country speed</span></span>', admin_country_speeds_path %>
+       </li>
+     </ul>
+     <%= yield %>
+   </div>
+<% end %>

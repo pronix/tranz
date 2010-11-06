@@ -1,0 +1,9 @@
+<% semantic_form_for :pay, :url => pay_gateway_webmoney_path,
+:html => {:class => "base_form"} do |form| %>
+<% form.inputs  do -%>
+<%= form.input :amount, :wrapper_html => {:class => "base_form" } %>
+<% end -%>
+<% form.buttons do -%>
+<%= form.commit_button t('webmoney.index.continue'), :class => "base_buttons" %>
+<% end -%>
+<% end %>
